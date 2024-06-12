@@ -1,6 +1,5 @@
 const express = require('express');
 require('dotenv').config();
-const inquirer = require('inquirer');
 const { Pool } = require('pg');
 
 
