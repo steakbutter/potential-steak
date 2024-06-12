@@ -1,5 +1,8 @@
 const express = require('express');
-const sequelize = require('./config/connection');
+require('dotenv').config();
+const inquirer = require('inquirer');
+const { Pool } = require('pg');
+
 
 const app = express();
 const PORT = process.env.PORT || 3001;
