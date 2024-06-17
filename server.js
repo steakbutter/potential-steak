@@ -1,6 +1,8 @@
 const express = require('express');
 require('dotenv').config();
+const inquirer = require('inquirer');
 const { Pool } = require('pg');
+
 
 
 const app = express();
@@ -21,6 +23,20 @@ const pool = new Pool(
 )
 
 pool.connect();
+
+// Inquirer setup
+
+inquirer.prompt([
+    {
+        type: "list",
+        name: "database",
+        message: "What would you like to do?",
+        choices: ["View All employees", "View All Roles", "View All Departments"]
+
+    },
+]).then((data) => {
+    const employeeDataBase = data.database;
+})
 
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
