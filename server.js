@@ -31,12 +31,14 @@ inquirer.prompt([
         type: "list",
         name: "database",
         message: "What would you like to do?",
-        choices: ["View All employees", "View All Roles", "View All Departments"]
+        choices: ["View All Departments", "View All Roles", "View All Employees"]
 
     },
 ]).then((data) => {
-    const employeeDataBase = data.database;
-})
+   if(data.choices === "View All Departments") {
+    return console.log('SELECT * FROM department;');
+   }
+});
 
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
