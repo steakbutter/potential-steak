@@ -15,12 +15,12 @@ INSERT INTO roles (id, title, salary, department_id) VALUES
 (8, 'Accountant', 125000, 4);
 
 INSERT INTO employee (id, first_name, last_name, role_id, manager_id) VALUES
-(1, 'Henry', 'Chinaski', 1, 0),
+(1, 'Henry', 'Chinaski', 1, NULL),
 (2, 'Kilgore', 'Trout', 1, 1),
-(3, 'Billy', 'Pilgrim', 2, 0),
+(3, 'Billy', 'Pilgrim', 2, NULL),
 (4, 'Stuart', 'Little', 2, 3),
-(5, 'Holden', 'Caulfield', 3, 0),
+(5, 'Holden', 'Caulfield', 3, NULL),
 (6, 'Louie', 'Szekely', 3, 5),
-(7, 'Charles', 'Bukowski', 4, 0),
+(7, 'Charles', 'Bukowski', 4, NULL),
 (8, 'Tyler', 'Durden', 4, 7);
 
