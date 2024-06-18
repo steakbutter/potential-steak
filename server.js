@@ -34,12 +34,13 @@ inquirer.prompt([
         choices: ["View All Departments", "View All Roles", "View All Employees"]
 
     },
-]).then((data) => {
-   if(data.choices === "View All Departments") {
-    return console.log('SELECT * FROM department;');
-   }
-});
+]).then(data => {
 
+    pool.query('SELECT * FROM employee', function (err, {rows}) {
+        console.log(rows);
+      });
+})  
+  
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
   });
