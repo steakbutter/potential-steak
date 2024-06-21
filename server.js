@@ -58,3 +58,11 @@ const getAllEmployees = () => {
       });
 }  
 
+
+const getAllDepartments = () => {
+    pool.query('SELECT * FROM department', function (err, {rows}){
+        console.table(rows);
+        menu();
+    })
+}
+
