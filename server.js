@@ -66,3 +66,10 @@ const getAllDepartments = () => {
     })
 }
 
+const getAllRoles = () => {
+    pool.query('SELECT * FROM role', function (err, {rows}){
+        console.table(rows);
+        menu();
+    })
+}
+
