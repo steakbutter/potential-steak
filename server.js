@@ -51,3 +51,10 @@ inquirer.prompt([
   
 })  }
   
+const getAllEmployees = () => {
+    pool.query('SELECT first_name, last_name, role.title FROM employee JOIN role ON employee.role_id=role.id', function (err, {rows}) {
+        console.table(rows);
+        menu();
+      });
+}  
+
