@@ -1,15 +1,9 @@
-const express = require('express');
+
 require('dotenv').config();
 const inquirer = require('inquirer');
 const { Pool } = require('pg');
 
 
-
-const app = express();
-const PORT = process.env.PORT || 3001;
-
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
 
 // Connect to database
 const pool = new Pool(
@@ -25,23 +19,35 @@ const pool = new Pool(
 pool.connect();
 
 // Inquirer setup
+const menu = () => {
+
 
 inquirer.prompt([
     {
         type: "list",
         name: "database",
         message: "What would you like to do?",
-        choices: ["View All Departments", "View All Roles", "View All Employees"]
+        choices: ["View All Departments", "View All Roles", "View All Employees", "Add Department"]
 
     },
 ]).then(data => {
-
-    pool.query('SELECT * FROM employee', function (err, {rows}) {
-        console.log(rows);
-      });
-})  
+    switch(data.database) {
+        case "View All Employees":
+            getAllEmployees()
+            break
+            
+        case "View All Departments":
+            getAllDepartments()
+            break
+          
+        case "View All Roles":
+            getAllRoles()
+            break 
+            
+        case "Add Department":
+            addDepartment()
+            break    
+    }
   
-app.listen(PORT, () => {
-    console.log(`Server running on port ${PORT}`);
-  });
+})  }
   
