@@ -46,7 +46,7 @@ inquirer.prompt([
             
         case "Add Department":
             addDepartment()
-            break    
+            break        
     }
   
 })  }
@@ -72,4 +72,20 @@ const getAllRoles = () => {
         menu();
     })
 }
+
+const addDepartment = () => {
+    inquirer.prompt([
+        {
+            type: 'input',
+            name: 'name',
+            message: 'Enter department name'
+        }
+    ]) .then(data => {
+        pool.query('INSERT INTO department (name) VALUES ($1)', [data.name], function (err, data){
+            console.log('Department created');
+            menu();
+        })
+    })
+    }
+    menu();
 
