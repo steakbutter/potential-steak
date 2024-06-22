@@ -67,7 +67,7 @@ const getAllDepartments = () => {
 }
 
 const getAllRoles = () => {
-    pool.query('SELECT * FROM role', function (err, {rows}){
+    pool.query('SELECT title, salary, department.name FROM role JOIN department ON role.department_id=department.id', function (err, {rows}){
         console.table(rows);
         menu();
     })
