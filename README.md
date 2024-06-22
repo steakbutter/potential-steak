@@ -18,7 +18,6 @@ If your README is long, add a table of contents to make it easy for users to fin
 ## Installation
 
 - Install inquirer npm
-- Install express npm
 - Install pg npm
 
 ## Usage

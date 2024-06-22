@@ -27,7 +27,7 @@ const menu = () => {
             type: "list",
             name: "database",
             message: "What would you like to do?",
-            choices: ["View All Departments","Add Department", "View All Roles", "Add Role", "View All Employees"]
+            choices: ["View All Departments","Add Department", "View All Roles", "Add Role", "View All Employees", "Add Employee"]
 
         },
     ]).then(data => {
@@ -49,6 +49,9 @@ const menu = () => {
                 break
             case "Add Role":
                 addRole()
+                break    
+            case "Add Employee":
+                addEmployee()
                 break    
         }
 
@@ -105,9 +108,10 @@ const addRole = () => {
             message: 'What is the salary of the role?'
         },
         {
-            type: 'input',
+            type: 'list',
             name: 'department_id',
-            message: 'Which department does the role belong to'
+            message: 'Which department does the role belong to',
+            choices: ['Sales', 'Legal', 'Engineering', 'Finance']
         }
     ]) .then(data => {
         pool.query('INSERT INTO role (title, salary, department_id) VALUES ($1, $2, $3)', [data.title, data.salary, data.department_id], function (err, data) {
@@ -116,6 +120,40 @@ const addRole = () => {
         })
     })
 } 
+
+const addEmployee = () => {
+    inquirer.prompt([
+        {
+            type: 'input',
+            name: 'first_name',
+            message: 'What is the employees first name?'
+        },
+        {
+            type: 'input',
+            name: 'last_name',
+            message: 'What is the employees last name?'
+        },
+        {
+            type: 'list',
+            name: 'role',
+            message: 'What is the employees role?',
+            choices: ['Sales Lead', 'Sales Person', 'Legal Team Lead', 'Lead Engineer', 'Software Engineer', 'Account Manager', 'Accountant']
+        },
+        {
+            type: 'list',
+            name: 'manager_id',
+            message: 'Who is the employees manager?',
+            choices: ['Henry Chinaski', 'Kilgore Trout', 'Billy Pilgrim', 'Stuart Little', 'Holden Caulfield', 'Louie Szekely', 'Charles Bukowski', 'Tyler Durden']
+        },
+        
+    ]).then(data => {
+        pool.query('INSERT INTO employee (first_name, last_name, role, manager_id VALUES ($1, $2, $3, $4)', [data.first_name, data.last_name, data.role, data.manager_id], function (err, data){
+            console.log('Added new employee to database.')
+            menu();
+        })
+    })
+
+}
 
 menu();
 
