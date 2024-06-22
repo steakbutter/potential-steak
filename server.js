@@ -22,52 +22,56 @@ pool.connect();
 const menu = () => {
 
 
-inquirer.prompt([
-    {
-        type: "list",
-        name: "database",
-        message: "What would you like to do?",
-        choices: ["View All Departments", "View All Roles", "View All Employees", "Add Department"]
+    inquirer.prompt([
+        {
+            type: "list",
+            name: "database",
+            message: "What would you like to do?",
+            choices: ["View All Departments","Add Department", "View All Roles", "Add Role", "View All Employees"]
 
-    },
-]).then(data => {
-    switch(data.database) {
-        case "View All Employees":
-            getAllEmployees()
-            break
-            
-        case "View All Departments":
-            getAllDepartments()
-            break
-          
-        case "View All Roles":
-            getAllRoles()
-            break 
-            
-        case "Add Department":
-            addDepartment()
-            break        
-    }
-  
-})  }
-  
+        },
+    ]).then(data => {
+        switch (data.database) {
+            case "View All Employees":
+                getAllEmployees()
+                break
+
+            case "View All Departments":
+                getAllDepartments()
+                break
+
+            case "View All Roles":
+                getAllRoles()
+                break
+
+            case "Add Department":
+                addDepartment()
+                break
+            case "Add Role":
+                addRole()
+                break    
+        }
+
+    })
+}
+
 const getAllEmployees = () => {
-    pool.query('SELECT first_name, last_name, role.title FROM employee JOIN role ON employee.role_id=role.id', function (err, {rows}) {
+    pool.query('SELECT first_name, last_name, role.title FROM employee JOIN role ON employee.role_id=role.id', function (err, { rows }) {
         console.table(rows);
         menu();
-      });
-}  
+    });
+}
 
 
 const getAllDepartments = () => {
-    pool.query('SELECT * FROM department', function (err, {rows}){
+    pool.query('SELECT * FROM department', function (err, { rows }) {
         console.table(rows);
         menu();
     })
 }
 
 const getAllRoles = () => {
-    pool.query('SELECT title, salary, department.name FROM role JOIN department ON role.department_id=department.id', function (err, {rows}){
+    pool.query('SELECT title, salary, department.name FROM role JOIN department ON role.department_id=department.id', function (err, { rows }) {
         console.table(rows);
         menu();
     })
@@ -80,12 +84,38 @@ const addDepartment = () => {
             name: 'name',
             message: 'Enter department name'
         }
-    ]) .then(data => {
-        pool.query('INSERT INTO department (name) VALUES ($1)', [data.name], function (err, data){
-            console.log('Department created');
+    ]).then(data => {
+        pool.query('INSERT INTO department (name) VALUES ($1)', [data.name], function (err, data) {
+            console.log('New department added to the database');
             menu();
         })
     })
-    }
-    menu();
+}
+
+const addRole = () => {
+    inquirer.prompt([
+        {
+            type: 'input',
+            name: 'title',
+            message: 'What is the name of the role?'
+        },
+        {
+            type: 'input',
+            name: 'salary',
+            message: 'What is the salary of the role?'
+        },
+        {
+            type: 'input',
+            name: 'department_id',
+            message: 'Which department does the role belong to'
+        }
+    ]) .then(data => {
+        pool.query('INSERT INTO role (title, salary, department_id) VALUES ($1, $2, $3)', [data.title, data.salary, data.department_id], function (err, data) {
+            console.log(`Added role to the database.`);
+            menu();
+        })
+    })
+} 
+
+menu();
 
