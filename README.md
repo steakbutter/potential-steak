@@ -7,7 +7,8 @@ This app can help any business owner have an organized way of adding or updating
 This challenge has been helpful to understand how inquirer can interact with postgresql to create a more organized database that can be created, updtated, or even deleted. 
 
 Github Repository: https://github.com/steakbutter/potential-steak
-Video Demo: 
+Video Demo: https://drive.google.com/file/d/1lW0zfDE50wVJRXyGj9PvnoGBq0t0OpQg/view?usp=sharing
+
 ## Table of Contents (Optional)
 
 If your README is long, add a table of contents to make it easy for users to find what they need.

@@ -114,7 +114,7 @@ const addRole = () => {
             choices: ['Sales', 'Legal', 'Engineering', 'Finance']
         }
     ]) .then(data => {
-        pool.query('INSERT INTO role (title, salary, department.department) VALUES ($1, $2, $3)', [data.title, data.salary, data.name], function (err, data) {
+        pool.query('INSERT INTO role (title, salary) VALUES ($1, $2)', [data.title, data.salary], function (err, data) {
             console.log(`Added role to the database.`);
             menu();
         })
