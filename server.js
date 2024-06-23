@@ -59,7 +59,8 @@ const menu = () => {
 }
 
 const getAllEmployees = () => {
-    pool.query('SELECT first_name, last_name, role.title FROM employee JOIN role ON employee.role_id=role.id', function (err, { rows }) {
+    pool.query('SELECT employee.id, first_name, last_name, role.title, department.name, role.salary, manager_id FROM employee JOIN role ON employee.role_id = role.id JOIN department ON role.department_id = department.id', function (err, { rows }) {
+        console.log(err);
         console.table(rows);
         menu();
     });
@@ -115,6 +116,7 @@ const addRole = () => {
         }
     ]) .then(data => {
         pool.query('INSERT INTO role (title, salary, department_id) VALUES ($1, $2, $3)', [data.title, data.salary, data.department_id], function (err, data) {
+            console.log(err);
             console.log(`Added role to the database.`);
             menu();
         })
