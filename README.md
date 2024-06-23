@@ -1,4 +1,4 @@
-# Employee Data Application
+# Employee Data Inquirer Application
 
 ## Description
 
@@ -26,7 +26,7 @@ If your README is long, add a table of contents to make it easy for users to fin
 ## Usage
 
 Type 'npm start' on the command line and choose one of the options available to view that specific table. <br><br>
-
+![alt text](<images/Employee Database.gif>)
 
 ## Credits
 https://www.w3schools.com/sql/sql_insert.asp
