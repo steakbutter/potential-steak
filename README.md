@@ -6,6 +6,8 @@ Employee Data application is a comand line interface that allows connection betw
 This app can help any business owner have an organized way of adding or updating their employees salaries and departments. <br>
 This challenge has been helpful to understand how inquirer can interact with postgresql to create a more organized database that can be created, updtated, or even deleted. 
 
+Github Repository: https://github.com/steakbutter/potential-steak
+Video Demo: 
 ## Table of Contents (Optional)
 
 If your README is long, add a table of contents to make it easy for users to find what they need.
@@ -26,8 +28,10 @@ Type 'npm start' on the command line and choose one of the options available to 
 
 
 ## Credits
+https://www.w3schools.com/sql/sql_insert.asp
+https://www.w3schools.com/sql/sql_where.asp
+https://www.w3schools.com/sql/sql_select.asp
 
-N/A.
 ## License
 
 N/A.

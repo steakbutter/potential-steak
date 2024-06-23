@@ -59,8 +59,7 @@ const menu = () => {
 }
 
 const getAllEmployees = () => {
-    pool.query('SELECT employee.id, first_name, last_name, role.title, department.name, role.salary, manager_id FROM employee JOIN role ON employee.role_id = role.id JOIN department ON role.department_id = department.id', function (err, { rows }) {
-        console.log(err);
+    pool.query('SELECT employee.id, first_name, last_name, role.title, department.department, role.salary, manager_id FROM employee JOIN role ON employee.role_id = role.id JOIN department ON role.department_id = department.id', function (err, { rows }) {
         console.table(rows);
         menu();
     });
@@ -75,7 +74,7 @@ const getAllDepartments = () => {
 }
 
 const getAllRoles = () => {
-    pool.query('SELECT title, salary, department.name FROM role JOIN department ON role.department_id=department.id', function (err, { rows }) {
+    pool.query('SELECT role.id, title, department.department, salary FROM role JOIN department ON role.department_id=department.id', function (err, { rows }) {
         console.table(rows);
         menu();
     })
@@ -85,11 +84,11 @@ const addDepartment = () => {
     inquirer.prompt([
         {
             type: 'input',
-            name: 'name',
+            name: 'department',
             message: 'Enter department name'
         }
     ]).then(data => {
-        pool.query('INSERT INTO department (name) VALUES ($1)', [data.name], function (err, data) {
+        pool.query('INSERT INTO department (department) VALUES ($1)', [data.department], function (err, data) {
             console.log('New department added to the database');
             menu();
         })
@@ -110,13 +109,12 @@ const addRole = () => {
         },
         {
             type: 'list',
-            name: 'department_id',
-            message: 'Which department does the role belong to',
+            name: 'name',
+            message: 'Which department does the role belong to?',
             choices: ['Sales', 'Legal', 'Engineering', 'Finance']
         }
     ]) .then(data => {
-        pool.query('INSERT INTO role (title, salary, department_id) VALUES ($1, $2, $3)', [data.title, data.salary, data.department_id], function (err, data) {
-            console.log(err);
+        pool.query('INSERT INTO role (title, salary, department.department) VALUES ($1, $2, $3)', [data.title, data.salary, data.name], function (err, data) {
             console.log(`Added role to the database.`);
             menu();
         })
